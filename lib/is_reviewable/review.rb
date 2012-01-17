@@ -15,6 +15,8 @@ module IsReviewable
         :body
       ].freeze
       
+    validates_presence_of :body
+
     # Associations.
     belongs_to :reviewable, :polymorphic => true
     belongs_to :reviewer,   :polymorphic => true
