@@ -16,6 +16,7 @@ module IsReviewable
       ].freeze
       
     validates_presence_of :body
+    validates_inclusion_of :rating, :in => 1..5
 
     # Associations.
     belongs_to :reviewable, :polymorphic => true
