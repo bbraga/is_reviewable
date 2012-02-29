@@ -32,6 +32,10 @@ module IsReviewable
     scope :lowest_rating,       :order => 'reviews.rating ASC'
     scope :highest_rating,      :order => 'reviews.rating DESC'
     
+    # Approved scopes: Filters
+    scope :approved, where(:approved => true)
+    scope :unapproved, where(:approved => false)
+    
     # Named scopes: Filters.
     scope :since,               lambda { |created_at_datetime|  { :conditions => ['reviews.created_at >= ?', created_at_datetime]} }
     scope :recent,              lambda { |arg|
