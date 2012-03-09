@@ -22,6 +22,8 @@ module IsReviewable
     belongs_to :reviewable, :polymorphic => true
     belongs_to :reviewer,   :polymorphic => true
     
+    has_many :abuses
+    
     # Aliases.
     alias :object :reviewable
     alias :owner  :reviewer
