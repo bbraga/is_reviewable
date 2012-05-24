@@ -222,7 +222,7 @@ module IsReviewable
       # 
       def average_rating(recalculate = false)
         if !recalculate && self.reviewable_caching_fields?(:average_rating)
-          self.average_rating
+          self.cached_average_rating
         else
           conditions = self.reviewable_conditions(true)
           conditions[0] << ' AND rating IS NOT NULL'
@@ -244,7 +244,7 @@ module IsReviewable
       #
       def total_reviews(recalculate = false)
         if !recalculate && self.reviewable_caching_fields?(:total_reviews)
-          self.total_reviews
+          self.cached_total_reviews
         else
           ::Review.approved.count(:conditions => self.reviewable_conditions)
         end
@@ -375,7 +375,7 @@ module IsReviewable
         #
         def reviewable_caching_fields?(*fields)
           fields = CACHABLE_FIELDS if fields.blank?
-          fields.all? { |field| self.attributes.has_key?(:"cached_#{field}") }
+          fields.all? { |field| self.attributes.has_key?("cached_#{field}") }
         end
         alias :has_reviewable_caching_fields? :reviewable_caching_fields?
         
